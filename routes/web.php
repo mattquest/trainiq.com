@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MovementController;
+use App\Http\Controllers\SetController;
+use App\Http\Controllers\SetGroupController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +27,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    Route::get('/movements', [MovementController::class, 'index'])->name('movements');
+    Route::post('/set-groups', [SetGroupController::class, 'store']);
+    Route::post('/movements', [MovementController::class, 'store']);
+    Route::get('/movements/list', [MovementController::class, 'list']);
+});
 
 require __DIR__.'/auth.php';

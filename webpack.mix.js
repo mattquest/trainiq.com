@@ -22,6 +22,23 @@ mix.js('resources/js/app.js', 'public/js')
         '@': 'resources/js',
     });
 
+mix.browserSync({
+    host: '127.0.0.1',
+    proxy: 'localhost',
+    open: false,
+    files: [
+            'app/**/*.php',
+            'resources/views/**/*.php',
+            'packages/mixdinternet/frontend/src/**/*.php',
+            'public/js/**/*.js',
+            'public/css/**/*.css'
+    ],
+    watchOptions: {
+            usePolling: true,
+            interval: 500
+    }
+});
+
 if (mix.inProduction()) {
     mix.version();
 }
