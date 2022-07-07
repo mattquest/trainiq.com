@@ -13,6 +13,12 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .react()
+    .webpackConfig({
+        devServer: {
+            host: '0.0.0.0',
+            port: 8080,
+        },
+    })
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
@@ -22,22 +28,31 @@ mix.js('resources/js/app.js', 'public/js')
         '@': 'resources/js',
     });
 
-mix.browserSync({
-    host: '127.0.0.1',
-    proxy: 'localhost',
-    open: false,
-    files: [
-            'app/**/*.php',
-            'resources/views/**/*.php',
-            'packages/mixdinternet/frontend/src/**/*.php',
-            'public/js/**/*.js',
-            'public/css/**/*.css'
-    ],
-    watchOptions: {
-            usePolling: true,
-            interval: 500
-    }
-});
+// mix.options({
+//     hmrOptions: {
+//         host: 'localhost',
+//         port: '80'
+//     },
+// });
+
+
+// mix.browserSync({
+//     host: '127.0.0.1',
+//     proxy: 'laravel.test',
+//     port: 3000,
+//     open: false,
+//     files: [
+//         'app/**/*.php',
+//         'resources/views/**/*.php',
+//         'packages/mixdinternet/frontend/src/**/*.php',
+//         'public/js/**/*.js',
+//         'public/css/**/*.css'
+//     ],
+//     watchOptions: {
+//         usePolling: true,
+//         interval: 500
+//     }
+// });
 
 if (mix.inProduction()) {
     mix.version();

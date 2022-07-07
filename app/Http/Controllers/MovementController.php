@@ -19,7 +19,7 @@ class MovementController extends Controller
     public function index()
     {
         return Inertia::render(
-            'Movements', 
+            'Movements',
             ['movements' => Movement::all()]
         );
     }

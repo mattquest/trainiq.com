@@ -65,6 +65,13 @@ class UsersCanLogSessionsTest extends FeatureTestBase
             ->setGroups->first()
             ->sets->first();
         $this->assertEquals($set->performed_time_constraint, $ten_minutes);
+        // ensure $athlete_one sees the sessions they logged
+        $this->actingAs(self::$athlete_one)->get('/log')
+            ->assertSee(self::$athlete_one->sessions->first()->completed_date);
+        // ensure $athlete_two does not
+        $this->actingAs(self::$athlete_two)->get('/log')
+        ->assertDontSee(self::$athlete_one->sessions->first()->completed_date);
+        
     }
 
 }
