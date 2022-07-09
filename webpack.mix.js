@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,22 +11,23 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .react()
-    .webpackConfig({
-        devServer: {
-            host: '0.0.0.0',
-            port: 8080,
-        },
-    })
-    .postCss('resources/css/app.css', 'public/css', [
-        require('postcss-import'),
-        require('tailwindcss'),
-        require('autoprefixer'),
-    ])
-    .alias({
-        '@': 'resources/js',
-    });
+mix
+  .ts("resources/js/app.js", "public/js")
+  .react()
+  .webpackConfig({
+    devServer: {
+      host: "0.0.0.0",
+      port: 8080,
+    },
+  })
+  .postCss("resources/css/app.css", "public/css", [
+    require("postcss-import"),
+    require("tailwindcss"),
+    require("autoprefixer"),
+  ])
+  .alias({
+    "@": "resources/js",
+  });
 
 // mix.options({
 //     hmrOptions: {
@@ -34,7 +35,6 @@ mix.js('resources/js/app.js', 'public/js')
 //         port: '80'
 //     },
 // });
-
 
 // mix.browserSync({
 //     host: '127.0.0.1',
@@ -55,5 +55,5 @@ mix.js('resources/js/app.js', 'public/js')
 // });
 
 if (mix.inProduction()) {
-    mix.version();
+  mix.version();
 }
